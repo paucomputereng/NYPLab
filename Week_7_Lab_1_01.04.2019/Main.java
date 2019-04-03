@@ -137,3 +137,139 @@ public class Main {
     }
 
 }
+
+
+#3 Nisan çarşamba lab
+import java.util.Scanner;
+
+public class Main {
+    static int [][] harita=new int[20][20];
+    static int x=0,y=0;
+    static Yon yon=Yon.SAG;
+    static Kalem kalem=Kalem.ACIK;
+
+    enum Kalem{
+        ACIK,KAPALI
+    }
+    enum Yon{
+        ASAGI,YUKARI,SAG,SOL
+    }
+    public static void main(String [] args){
+        int durum=0;
+        while (durum!=9){
+            System.out.printf("Durum..:");
+            Scanner scanner=new Scanner(System.in);
+            durum=scanner.nextInt();
+            switch (durum){
+                case 1:
+                    kalem=Kalem.ACIK;
+                    break;
+                case 2:
+                    kalem=Kalem.KAPALI;
+                    break;
+                case 3:
+                    yon=Yon.SAG;
+                    break;
+                case 4:
+                    yon=Yon.SOL;
+                    break;
+                case 5:
+                    System.out.println("Adım..:");
+                    int adim=scanner.nextInt();
+                    ilerle(adim);
+                    break;
+                case 6:
+                    goruntule();
+                    break;
+                case 10:
+                    yon=Yon.YUKARI;
+                    break;
+                case 11:
+                    yon=Yon.ASAGI;
+                    break;
+            }
+        }
+    }
+
+    private static void goruntule() {
+        for (int i=0;i<20;i++){
+            for (int j=0;j<20;j++){
+                System.out.print(" "+harita[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    private static void ilerle(int adim) {
+        if (kalem == Kalem.ACIK){
+            int gecici=0;
+            switch (yon){
+                case SAG:
+                    gecici=x;
+                    if ((x+adim)<20){
+                        for (int i=x;i<(x+adim);i++){
+                            harita[y][i]=1;
+                        }
+                    }
+                    x=gecici+adim;
+                    break;
+                case SOL:
+                    gecici=x;
+                    if ((x-adim)>=0){
+                        for (int i=x;i<(x-adim);i--){
+                            harita[y][i]=1;
+                        }
+                    }
+                    x=gecici-adim;
+                    break;
+                case ASAGI:
+                    gecici=y;
+                    if ((y+adim)<20){
+                        for (int i=y;i<(y-adim);i--){
+                            harita[i][x]=1;
+                        }
+                    }
+                    else {
+                        System.out.println("Hata "+x+" "+y);
+                    }
+                    y=gecici-adim;
+                    break;
+                case YUKARI:
+                    gecici=y;
+                    if ((y-adim)>=0){
+                        for (int i=y;i<(y+adim);i++){
+                            harita[i][x]=1;
+                        }
+                    }
+                    y=gecici+adim;
+                    break;
+            }
+        }else {
+            switch (yon){
+                case SAG:
+                    if ((x+adim)<20){
+                        x=x+adim;
+                    }
+                    break;
+                case SOL:
+                    if ((x-adim)>=0){
+                        x=x-adim;
+                    }
+                    break;
+                case ASAGI:
+                    if ((y+adim)<20){
+                        y=y+adim;
+                    }
+                    break;
+                case YUKARI:
+                    if ((y-adim)>=0){
+                        y=y-adim;
+                    }
+                    break;
+            }
+        }
+    }
+}
+
+
+
