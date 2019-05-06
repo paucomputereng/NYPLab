@@ -10,7 +10,7 @@ public class Numbers
 // -------------
 public static void main (String[] args)
     {
-        //int, char, boolean, float, double, short, byte, long .primitive obje değiller
+        //int, char, boolean, float, double, short, byte, long primitivedirler, obje değiller
         //int -> Integer
         //char -> Character
         Integer[] intList;
